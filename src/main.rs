@@ -1,15 +1,17 @@
-mod game;
-mod computer;
-mod benchmark;
+#![allow(dead_code)]
 
-use nannou::prelude::*;
+mod benchmark;
+mod computer;
+mod game;
+
 use game::Game;
-use rand::{Rng, rngs::ThreadRng};
+use nannou::prelude::*;
+use rand::{rngs::ThreadRng, Rng};
 
 struct Model {
     game: Game,
     mouse_clicked: bool,
-    rng: ThreadRng
+    rng: ThreadRng,
 }
 
 fn main() {
@@ -25,7 +27,7 @@ fn model(_app: &App) -> Model {
     Model {
         game: Game::new(),
         mouse_clicked: false,
-        rng: rand::thread_rng()
+        rng: rand::thread_rng(),
     }
 }
 
@@ -44,7 +46,7 @@ fn event(app: &App, model: &mut Model, _event: Event) {
 
 fn view(app: &App, model: &Model, frame: Frame) {
     let draw = app.draw();
-    
+
     model.game.draw(&draw, &app.mouse);
 
     draw.to_frame(app, &frame).unwrap();
